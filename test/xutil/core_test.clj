@@ -174,7 +174,8 @@
  "frequencies"
  (transduce identity x/frequencies []) => {}
  (transduce identity x/frequencies (range 4)) => {0 1, 1 1, 2 1, 3 1}
- (transduce (map #(int (/ % 4))) x/frequencies (range 10)) => {0 4, 1 4, 2 2})
+ (transduce (map #(quot % 4)) x/frequencies (range 10)) => {0 4, 1 4, 2 2}
+ (transduce (map #(quot % 4)) x/frequencies (range 100)) => (frequencies (map #(quot % 4) (range 100))))
 
 (facts
  "frequenciesv"
@@ -188,7 +189,9 @@
  "group-by"
  (transduce identity (x/group-by identity) (range 5)) => {0 [0] 1 [1] 2 [2] 3 [3] 4 [4]}
  (transduce identity (x/group-by odd?) (range 5)) => {true [1 3] false [0 2 4]}
+ (transduce identity (x/group-by odd?) (range 10)) => (group-by odd? (range 10))
  (transduce identity (x/group-by odd? (x/into [])) (range 5)) => {true [1 3] false [0 2 4]}
  (transduce identity (x/group-by odd? +) (range 5)) => {true 4 false 6}
- (transduce identity (x/group-by odd? (x/multi-rf [+ *])) (range 5)) => {true [4 3] false [6 0]})
+ (transduce identity (x/group-by odd? (x/multi-rf [+ *])) (range 5)) => {true [4 3] false [6 0]}
+ (transduce identity (x/group-by odd? x/count) (range 10)) => (frequencies (map odd? (range 10))))
 
