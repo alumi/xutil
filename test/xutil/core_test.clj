@@ -187,5 +187,8 @@
 (facts
  "group-by"
  (transduce identity (x/group-by identity) (range 5)) => {0 [0] 1 [1] 2 [2] 3 [3] 4 [4]}
- (transduce identity (x/group-by odd?) (range 5)) => {true [1 3] false [0 2 4]})
+ (transduce identity (x/group-by odd?) (range 5)) => {true [1 3] false [0 2 4]}
+ (transduce identity (x/group-by odd? (x/into [])) (range 5)) => {true [1 3] false [0 2 4]}
+ (transduce identity (x/group-by odd? +) (range 5)) => {true 4 false 6}
+ (transduce identity (x/group-by odd? (x/multi-rf [+ *])) (range 5)) => {true [4 3] false [6 0]})
 

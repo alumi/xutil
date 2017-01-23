@@ -181,14 +181,17 @@
    (assoc! r x (if-let [old (r x)] (inc old) 1))))
 
 (defn group-by
-  "Returns a reducing function acts like `group-by`."
-  [key-fn]
-  (fn group-by-inner
-    ([] (transient {}))
-    ([x] (clojure.core/into {} (map (fn [[k v]] [k (persistent! v)])) (persistent! x)))
-    ([r x]
-     (let [k (key-fn x)]
-       (assoc! r k (if-let [old (r k)] (conj! old x) (transient [x])))))))
+  "Returns a reducing function acts like `group-by`.
+  Second argument `rf` is a reducing function appliede to each group. Default is (into [])."
+  ([key-fn]
+   (group-by key-fn (into [])))
+  ([key-fn rf]
+   (fn group-by-inner
+     ([] (transient {}))
+     ([x] (clojure.core/into {} (map (fn group-by-inner-finish [[k v]] [k (rf v)])) (persistent! x)))
+     ([r x]
+      (let [k (key-fn x)]
+        (assoc! r k (if-let [old (r k)] (rf old x) (let [init (rf)] (rf init x)))))))))
 
 (defn frequenciesv
   "Like `frequencies`, but specialized for counting long numbers up to `size`."
