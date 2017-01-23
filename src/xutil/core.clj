@@ -142,9 +142,11 @@
   ([x] x)
   ([r x] (reduced (clojure.core/first x))))
 
-(defn second []
+(defn second
   "Reducing function returns the second element."
-  ((comp (take 2) (drop 1)) first))
+  ([] nil)
+  ([x] (if (= x :xutil-second-dummy-element) nil x))
+  ([r x] (if (nil? r) :xutil-second-dummy-element (reduced x))))
 
 (defn last
   "Reducing function returns the last element."

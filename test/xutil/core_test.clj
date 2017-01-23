@@ -142,10 +142,10 @@
 
 (facts
  "second"
- (transduce identity (x/second) []) => nil
- (transduce identity (x/second) [0]) => nil
- (transduce identity (x/second) [0 1]) => 1
- (transduce identity (x/second) [0 1 2]) => 1)
+ (transduce identity x/second []) => nil
+ (transduce identity x/second [0]) => nil
+ (transduce identity x/second [0 1]) => 1
+ (transduce identity x/second [0 1 2]) => 1)
 
 (facts
  "last"
