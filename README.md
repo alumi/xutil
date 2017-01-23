@@ -2,6 +2,16 @@
 
 A tiny utility library for transducers.
 
+[![Build Status](https://travis-ci.org/alumi/xutil.svg?branch=master)](https://travis-ci.org/alumi/xutil)
+
+[![Clojars Project](https://img.shields.io/clojars/v/xutil.svg)](https://clojars.org/xutil)
+
+## Installation
+
+```clojure
+[xutil "0.0.1-SNAPSHOT"]
+```
+
 ## Usage
 
 ```clojure
