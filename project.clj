@@ -4,7 +4,7 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.8.0"]
-                 [org.clojure/core.async "0.2.395"]]
+                 [org.clojure/core.async "0.3.442"]]
   :profiles {:test {:dependencies [[midje "1.8.3"]]
                     :plugins [[lein-midje "3.2.1"]]
                     :global-vars {*warn-on-reflection* true}
