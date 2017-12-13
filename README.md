@@ -9,13 +9,14 @@ A tiny utility library for transducers.
 ## Installation
 
 ```clojure
-[xutil "0.0.1-SNAPSHOT"]
+[xutil "0.0.2-SNAPSHOT"]
 ```
 
 ## Usage
 
 ```clojure
-(require '[xutil.core :as x])
+(require '[xutil.ctx :as x])
+(require '[xutil.rf :as rf])
 
 ;; `mtransduce` is a parallel version of `transduce` taking multiple reducing functions.
 ;; Results are computed without holding entire sequence on memory.
@@ -29,9 +30,9 @@ A tiny utility library for transducers.
 ;; Some reducing functions which can be combined with standard transducers.
 (x/mtransduce
   cat
-  {:count x/count
-   :freq ((map #(mod % 4)) x/frequencies)
-   :group ((filter odd?) (x/group-by (comp count str)))}
+  {:count rf/count
+   :freq ((map #(mod % 4)) rf/frequencies)
+   :group ((filter odd?) (rf/group-by (comp count str)))}
   [(range 10) (range 5 15)])
 
 => {:count 20

@@ -1,4 +1,4 @@
-(defproject xutil "0.0.1-SNAPSHOT"
+(defproject xutil "0.0.2-SNAPSHOT"
   :description "Tiny utility library for transducers."
   :url "http://github.com/alumi/xutil"
   :license {:name "Eclipse Public License"
